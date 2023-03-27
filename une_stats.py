@@ -52,7 +52,7 @@ def plot_daily_generation_and_demand(headers, dates, data, suptitle='', **kwargs
     return fig
 
 
-def report_une_stats(data_filename, output_path):
+def report_une_stats(data_filename, output_path, show=False):
     with open(data_filename, encoding='utf-8') as f:
         lines = np.array([line.strip().split('\t') for line in f], dtype=object)
     headers = lines[0]
@@ -66,12 +66,13 @@ def report_une_stats(data_filename, output_path):
         dates,
         une_data[:, [0, 1, 3]],
         suptitle='Estimado de Generación vs Demanda en horario pico',
-        date_step=2, show=True)
+        date_step=2, show=show)
 
     fig_generation.savefig(str((output_path / 'fig_01_generation_vs_demand.png').absolute()))
 
 
 if __name__ == '__main__':
     report_une_stats('une_cuba_diario.txt',
-                     'c:/Users/User/')
+                     'c:/Users/User/',
+                     show=True)
 
